@@ -35,24 +35,36 @@
         android:id="@+id/label1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LAPOR"
+        android:text="Aduan"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp" />
 
-    <GridView
-        android:id="@+id/reportGrid"
+    <ImageButton
+        android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="159dp"
-        android:gravity="center"
-        android:horizontalSpacing="30dp"
+
+        android:contentDescription="Back Button"
+        android:layout_alignTop="@id/label1"
+        android:layout_toStartOf="@id/label1"
+        android:layout_marginRight="16dp" />
+    <!--    android:src="@drawable/ic_back"-->
+
+    <GridView
+        android:id="@+id/reportGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:numColumns="2"
-        android:padding="16dp"
-        android:verticalSpacing="30dp" />
+        android:horizontalSpacing="16dp"
+        android:verticalSpacing="16dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:layout_below="@id/label1"
+        android:descendantFocusability="blocksDescendants" />
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar"

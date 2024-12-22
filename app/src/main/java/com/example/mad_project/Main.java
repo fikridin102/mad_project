@@ -1,8 +1,9 @@
 package com.example.mad_project;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
@@ -10,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import android.view.MenuItem;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +22,7 @@ public class Main extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);  // Set the main layout
+        setContentView(R.layout.main);
 
         // grid img and lbl
         String[] labels = {"Report"};
@@ -59,24 +62,7 @@ public class Main extends AppCompatActivity {
                 return false;
             }
         });
-
-        // Emergency Call functionality for 'kecemasan' layout
-        setEmergencyCallFunctionality();
     }
 
-    private void setEmergencyCallFunctionality() {
-        // Initialize Emergency Call view from 'kecemasan.xml'
-        ImageButton imageButton = findViewById(R.id.imageButton3);
-
-        // Create an instance of EmergencyCall
-        EmergencyCall emergencyCall = new EmergencyCall(this);
-
-        // Set click listener for the ImageButton to make an emergency call
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                emergencyCall.makeCall("60182508259"); // Replace with the desired phone number
-            }
-        });
-    }
 }
+

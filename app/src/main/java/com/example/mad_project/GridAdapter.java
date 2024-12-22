@@ -2,6 +2,7 @@ package com.example.mad_project;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +16,8 @@ public class GridAdapter extends BaseAdapter {
     private Context context;
     private String[] labels;
     private int[] images;
-    private Map<Integer, Class<?>> activityMap; // Map grid item index to target activity
+    private Map<Integer, Class<?>> activityMap;
 
-    // Constructor accepts the context, labels, images, and a map of item-to-activity navigation
     public GridAdapter(Context context, String[] labels, int[] images, Map<Integer, Class<?>> activityMap) {
         this.context = context;
         this.labels = labels;
@@ -45,7 +45,7 @@ public class GridAdapter extends BaseAdapter {
         View view = convertView;
         if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.grid_item, null); // Ensure this layout exists
+            view = inflater.inflate(R.layout.grid_item, null);
         }
 
         ImageView imageView = view.findViewById(R.id.grid_image);
@@ -54,13 +54,14 @@ public class GridAdapter extends BaseAdapter {
         imageView.setImageResource(images[position]);
         textView.setText(labels[position]);
 
-        // Set the onClickListener for each grid item
         view.setOnClickListener(v -> {
-            // Check if there's a mapping for the current position
             if (activityMap != null && activityMap.containsKey(position)) {
-                // Get the target activity from the map and start it
-                Class<?> targetActivity = activityMap.get(position);
-                Intent intent = new Intent(context, targetActivity);
+                Intent intent = new Intent(context, activityMap.get(position));
+                context.startActivity(intent);
+            } else {
+                Intent intent = new Intent(context, ReportForm.class);
+                intent.putExtra("title", labels[position]);
+                intent.putExtra("id", position);
                 context.startActivity(intent);
             }
         });

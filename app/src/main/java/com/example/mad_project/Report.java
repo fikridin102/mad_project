@@ -1,48 +1,54 @@
 package com.example.mad_project;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
-import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import java.util.HashMap;
-import java.util.Map;
-
-public class Report extends AppCompatActivity {
+public class Report extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report);
 
+        ImageButton btnBack = findViewById(R.id.btnBack);
+
         // grid img and lbl
-        String[] labels = {"Laman Utama"};
+        String[] labels = {"Banjir", "Ribut", "Tanah Runtuh", "Pencemaran", "Kemarau", "Penutupan Jalan"};
         int[] images = {
+                R.drawable.home,
+                R.drawable.home,
+                R.drawable.home,
+                R.drawable.home,
+                R.drawable.home,
                 R.drawable.home,
         };
 
-        //  map of grid item index and target activity
-        Map<Integer, Class<?>> activityMap = new HashMap<>();
-        activityMap.put(0, Main.class); // Report button
-
         GridView gridView = findViewById(R.id.reportGrid);
-        GridAdapter adapter = new GridAdapter(this, labels, images, activityMap);
+        GridAdapter adapter = new GridAdapter(this, labels, images, null);
         gridView.setAdapter(adapter);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Report.this, Main.class);
+                startActivity(intent);
+            }
+        });
+
+        gridView.setOnItemClickListener((parent, view, position, id) -> {
+            String label = labels[position];
+            Intent intent = new Intent(Report.this, ReportForm.class);
+            intent.putExtra("title", label);
+            intent.putExtra("id", position);
+            startActivity(intent);
+        });
 
         //navbar
         BottomNavigationView bottomNavigationView = findViewById(R.id.navbar);
