@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.ANSWER_PHONE_CALLS"/>
+
+    <!-- Permission to make phone calls -->
+    <uses-permission android:name="android.permission.PHONE_CALLS"/>
 
     <application
         android:allowBackup="true"
@@ -13,17 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mad_project"
         tools:targetApi="31">
+
         <activity
             android:name=".Main"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Report"></activity>
         <activity android:name=".ReportForm"></activity>
+        <activity android:name=".EmergencyCall"></activity>
 
     </application>
 

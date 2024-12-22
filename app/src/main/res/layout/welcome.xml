@@ -5,58 +5,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<!--    tools:context=".MainActivity">-->
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="346dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="72dp"
-        android:background="#1E90FF"
-        android:text="MULA"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_margin="32dp"
-        app:layout_constraintTop_toBottomOf="@id/textView2" />
-
+    <!-- Emergency Title -->
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="AGENSI PENGURUSAN BENCANA NEGARA"
-        android:textAlignment="center"
+        android:layout_marginTop="84dp"
+        android:text="KECEMASAN"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_margin="8dp"
-        app:layout_constraintTop_toBottomOf="@id/textView" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="270dp"
-        android:layout_height="296dp"
-        android:layout_marginTop="88dp"
+    <!-- SOS Button -->
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="182dp"
+        android:layout_height="177dp"
+        android:layout_marginTop="48dp"
+        android:background="@null"
+        android:contentDescription="SOS emergency button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_margin="85dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/download" />
+        app:layout_constraintTop_toBottomOf="@id/textView3"
+        app:srcCompat="@drawable/roundedbutton"
+        tools:layout_editor_absoluteY="201dp"/>
 
+    <!-- SOS Label -->
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="PORTAL RASMI"
+        android:text="SOS"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintTop_toTopOf="@id/imageButton3"
+        app:layout_constraintBottom_toBottomOf="@id/imageButton3"
+        app:layout_constraintStart_toStartOf="@id/imageButton3"
+        app:layout_constraintEnd_toEndOf="@id/imageButton3" />
+
+    <!-- Instructional Text -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="355dp"
+        android:layout_height="47dp"
+        android:text="Tekan SOS jika berlaku bencana alam disekeliling anda"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/imageView" />
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imageButton3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
