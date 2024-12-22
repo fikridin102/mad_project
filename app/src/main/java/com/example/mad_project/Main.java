@@ -1,23 +1,15 @@
 package com.example.mad_project;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.GridView;
-import android.widget.ImageButton;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import android.view.MenuItem;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main extends AppCompatActivity {
+public class Main extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
