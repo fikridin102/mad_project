@@ -35,14 +35,14 @@
         android:id="@+id/label1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LAMAN UTAMA"
+        android:text="LAPOR"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp" />
 
     <GridView
-        android:id="@+id/funcGrid"
+        android:id="@+id/reportGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
