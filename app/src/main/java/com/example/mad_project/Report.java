@@ -20,8 +20,9 @@ public class Report extends Activity {
         ImageButton btnBack = findViewById(R.id.btnBack);
 
         // grid img and lbl
-        String[] labels = {"Banjir", "Ribut", "Tanah Runtuh", "Pencemaran", "Kemarau", "Penutupan Jalan"};
+        String[] labels = {"Banjir", "Ribut", "Tanah Runtuh", "Pencemaran", "Kemarau", "Penutupan Jalan", "Lain-lain"};
         int[] images = {
+                R.drawable.home,
                 R.drawable.home,
                 R.drawable.home,
                 R.drawable.home,
