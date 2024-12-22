@@ -1,6 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <!-- Emergency Title -->
+
+    <!-- Background Rounded Shape -->
+
+    <!-- SOS Button -->
+
+    <!-- SOS Label -->
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        android:text="KECEMASAN"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_margin="66dp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="182dp"
+        android:layout_height="177dp"
+        android:background="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_margin="20dp"
+        app:srcCompat="@drawable/roundedbutton"
+        tools:layout_editor_absoluteY="201dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SOS"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        android:textSize="34sp"
+        app:layout_constraintTop_toTopOf="@id/imageButton3"
+        app:layout_constraintBottom_toBottomOf="@id/imageButton3"
+        app:layout_constraintStart_toStartOf="@id/imageButton3"
+        app:layout_constraintEnd_toEndOf="@id/imageButton3" />
+
+    <!-- Instructional Text -->
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="355dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="88dp"
+        android:text="Tekan SOS jika berlaku bencana alam disekeliling anda"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_margin="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imageButton3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
