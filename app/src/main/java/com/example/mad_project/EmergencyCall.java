@@ -44,8 +44,8 @@ public class EmergencyCall extends Activity {
 
                 // Navigation using if-else
                 if (selectedItemId == R.id.nav_home) {
-                    Intent homeIntent = new Intent(EmergencyCall.this, Main.class);
-                    startActivity(homeIntent);
+                    Intent main = new Intent(EmergencyCall.this, Main.class);
+                    startActivity(main);
                     return true;
                 } else if (selectedItemId == R.id.nav_map) {
                     // TODO: Add logic for Map navigation

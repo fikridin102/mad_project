@@ -30,7 +30,7 @@ public class Mula extends Activity {
     // Function to handle the button click
     private void onStartButtonClicked() {
         // Navigate to another activity (e.g., EmergencyCallActivity)
-        Intent intent = new Intent(Mula.this, Main.class);
-        startActivity(intent);
+        Intent main = new Intent(Mula.this, Main.class);
+        startActivity(main);
     }
 }
