@@ -53,8 +53,8 @@ public class Main extends Activity {
                 int selectedItem = item.getItemId();
                 String itemId = String.valueOf(selectedItem);
                 if (itemId.equals(R.id.nav_home)) {
-                    Intent intent = new Intent(Main.this, Main.class);
-                    startActivity(intent);
+                    Intent main = new Intent(Main.this, Main.class);
+                    startActivity(main);
                     return true;
                 } else if (itemId.equals(R.id.nav_map)) {
 //                    Intent intent = new Intent(MainActivity.this, Report.class);

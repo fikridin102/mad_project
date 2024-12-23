@@ -59,10 +59,10 @@ public class GridAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, activityMap.get(position));
                 context.startActivity(intent);
             } else {
-                Intent intent = new Intent(context, ReportForm.class);
-                intent.putExtra("title", labels[position]);
-                intent.putExtra("id", position);
-                context.startActivity(intent);
+                Intent reportForm = new Intent(context, ReportForm.class);
+                reportForm.putExtra("title", labels[position]);
+                reportForm.putExtra("id", position);
+                context.startActivity(reportForm);
             }
         });
 

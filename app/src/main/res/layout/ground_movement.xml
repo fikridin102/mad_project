@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -31,118 +30,167 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/label1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pergerakan Tanah"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@id/toolbar"
-        android:layout_marginTop="24dp" />
+        android:layout_above="@id/navbar">
 
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="Back Button"
-        android:src="@drawable/back"
-        android:layout_alignTop="@id/label1"
-        android:layout_toStartOf="@id/label1"
-        android:layout_marginRight="16dp"
-        android:background="@null" />
-
-
-    <!-- Status Section -->
-    <TextView
-        android:id="@+id/lblStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status: No Movement Detected"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_below="@id/label1"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/holo_green_dark" />
-
-    <!-- Graph Section -->
-    <View
-        android:id="@+id/viewGraph"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@id/lblStatus"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@android:color/darker_gray"
-        android:contentDescription="Seismic Graph Placeholder" />
-
-    <!-- Alert Section -->
-    <TextView
-        android:id="@+id/lblAlert"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alert: No alerts at the moment"
-        android:textSize="14sp"
-        android:layout_below="@id/viewGraph"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"
-        android:textColor="@android:color/holo_red_dark" />
-
-    <!-- Control Buttons -->
-    <LinearLayout
-        android:id="@+id/ctrl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_below="@id/lblAlert"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true">
-
-        <Button
-            android:id="@+id/btnStart"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Monitoring"
-            android:layout_marginRight="16dp" />
+            android:paddingBottom="16dp">
 
-        <Button
-            android:id="@+id/btnStop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Stop Monitoring" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/label1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pergerakan Tanah"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp" />
 
-    <!-- Additional Information -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/ctrl"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Back Button"
+                android:src="@drawable/back"
+                android:layout_alignTop="@id/label1"
+                android:layout_toStartOf="@id/label1"
+                android:layout_marginRight="16dp"
+                android:background="@null" />
 
-        <TextView
-            android:id="@+id/intensity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Intensity: 0.0"
-            android:textSize="14sp" />
+            <TextView
+                android:id="@+id/lblStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status: Tiada pergerakan dikesan"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_below="@id/label1"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/holo_green_dark" />
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Timestamp: Not available"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp" />
-    </LinearLayout>
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/viewGraph"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_below="@id/lblStatus"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@android:color/darker_gray"
+                android:contentDescription="Seismic Graph Placeholder" />
 
-    <!-- Bottom Navigation -->
+            <TextView
+                android:id="@+id/lblAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tiada amaran"
+                android:textSize="14sp"
+                android:layout_below="@id/viewGraph"
+                android:layout_marginTop="16dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/holo_red_dark" />
+
+            <LinearLayout
+                android:id="@+id/ctrl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_below="@id/lblAlert"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:id="@+id/btnStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mula"
+                    android:layout_marginRight="16dp" />
+
+                <Button
+                    android:id="@+id/btnStop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Berhenti" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/currentOutput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/ctrl"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <TextView
+                    android:id="@+id/intensity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Keamatan: 0.0"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Masa: --.--"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/currentOutput"
+                android:layout_marginTop="16dp"
+                android:stretchColumns="1"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:divider="@android:color/darker_gray"
+                android:showDividers="middle">
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="No"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:text="Masa"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Keamatan"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:gravity="center" />
+                </TableRow>
+
+            </TableLayout>
+        </RelativeLayout>
+    </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar"
         android:layout_width="match_parent"
