@@ -18,6 +18,7 @@ public class ReportForm extends Activity {
         setContentView(R.layout.report_form);
 
         TextView label1 = findViewById(R.id.label1);
+//        EditText txtType = findViewById(R.id.txtType);
         EditText txtFullName = findViewById(R.id.txtFullName);
         EditText txtEmail = findViewById(R.id.txtEmail);
         EditText txtAddress = findViewById(R.id.txtAddress);
@@ -30,9 +31,15 @@ public class ReportForm extends Activity {
         // Receive parameters from Report
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
+//        int position = Integer.parseInt(intent.getStringExtra("id"));
         if (title != null) {
             label1.setText("Aduan: " + title);
         }
+//        if (position == 6){
+//            txtType.setVisibility(View.VISIBLE);
+//        } else {
+//            txtType.setVisibility(View.INVISIBLE);
+//        }
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +60,7 @@ public class ReportForm extends Activity {
             @Override
             public void onClick(View v) {
                 // Capture inputs
+//                String type = txtType.getText().toString().trim();
                 String fullName = txtFullName.getText().toString().trim();
                 String email = txtEmail.getText().toString().trim();
                 String address = txtAddress.getText().toString().trim();
@@ -61,6 +69,8 @@ public class ReportForm extends Activity {
                 // Validate inputs
                 if (fullName.isEmpty() || email.isEmpty() || address.isEmpty() || detail.isEmpty()) {
                     Toast.makeText(ReportForm.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
+//                } else if (type.isEmpty()) {
+//                    Toast.makeText(ReportForm.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                 } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     Toast.makeText(ReportForm.this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
                 } else {
@@ -75,6 +85,9 @@ public class ReportForm extends Activity {
         btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                txtType.setText("");
+                txtFullName.setText("");
+                txtEmail.setText("");
                 txtAddress.setText("");
                 txtDetail.setText("");
                 Toast.makeText(ReportForm.this, "Form cleared.", Toast.LENGTH_SHORT).show();

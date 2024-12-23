@@ -30,6 +30,7 @@
         <activity android:name=".Main"></activity>
         <activity android:name=".Report"></activity>
         <activity android:name=".ReportForm"></activity>
+        <activity android:name=".GroundMovement"></activity>
         <activity android:name=".EmergencyCall"></activity>
 
     </application>

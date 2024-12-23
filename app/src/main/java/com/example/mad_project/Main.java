@@ -26,16 +26,18 @@ public class Main extends Activity {
         setContentView(R.layout.main);
 
         // grid img and lbl
-        String[] labels = {"Report","Emergency"};
+        String[] labels = {"Report", "Emergency", "Ground Detection"};
         int[] images = {
                 R.drawable.report,
                 R.drawable.emergency,
+                R.drawable.back,
         };
 
         // Create a map of grid item index to target activity
         Map<Integer, Class<?>> activityMap = new HashMap<>();
-        activityMap.put(0, Report.class); // Report button
-        activityMap.put(1, EmergencyCall.class); // Report button
+        activityMap.put(0, Report.class);
+        activityMap.put(1, EmergencyCall.class);
+        activityMap.put(2, GroundMovement.class);
 
         // Initialize GridView and set the custom adapter with the map
         GridView gridView = findViewById(R.id.funcGrid);

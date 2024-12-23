@@ -35,22 +35,23 @@
         android:id="@+id/label1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aduan"
+        android:text="Aduan: "
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" />
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="24dp" />
 
-    <!-- Back Button -->
     <ImageButton
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="Back Button"
+        android:src="@drawable/back"
         android:layout_alignTop="@id/label1"
         android:layout_toStartOf="@id/label1"
-        android:layout_marginRight="16dp" />
-    <!--    android:src="@drawable/ic_back"-->
+        android:layout_marginRight="16dp"
+        android:background="@null" />
 
     <!-- Form Layout -->
     <LinearLayout
@@ -62,6 +63,17 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="vertical">
+
+        <!-- Type Input -->
+        <EditText
+            android:id="@+id/txtType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Jenis Bencana"
+            android:inputType="text"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:visibility="invisible"/>
 
         <!-- Full Name Input -->
         <EditText
