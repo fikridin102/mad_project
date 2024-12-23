@@ -38,17 +38,17 @@ public class Report extends Activity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Report.this, Main.class);
-                startActivity(intent);
+                Intent main = new Intent(Report.this, Main.class);
+                startActivity(main);
             }
         });
 
         gridView.setOnItemClickListener((parent, view, position, id) -> {
             String label = labels[position];
-            Intent intent = new Intent(Report.this, ReportForm.class);
-            intent.putExtra("title", label);
-            intent.putExtra("id", position);
-            startActivity(intent);
+            Intent reportform = new Intent(Report.this, ReportForm.class);
+            reportform.putExtra("title", label);
+            reportform.putExtra("id", position);
+            startActivity(reportform);
         });
 
         //navbar
@@ -59,8 +59,8 @@ public class Report extends Activity {
                 int selectedItem = item.getItemId();
                 String itemId = String.valueOf(selectedItem);
                 if (itemId.equals(R.id.nav_home)) {
-                    Intent intent = new Intent(Report.this, Main.class);
-                    startActivity(intent);
+                    Intent main = new Intent(Report.this, Main.class);
+                    startActivity(main);
                     return true;
                 } else if (itemId.equals(R.id.nav_map)) {
 //                    Intent intent = new Intent(Report.this, Main.class);
