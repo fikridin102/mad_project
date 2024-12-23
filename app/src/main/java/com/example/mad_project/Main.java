@@ -10,7 +10,6 @@ import android.widget.GridView;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -51,7 +50,7 @@ public class Main extends Activity {
                 int selectedItem = item.getItemId();
                 String itemId = String.valueOf(selectedItem);
                 if (itemId.equals(R.id.nav_home)) {
-                    Intent intent = new Intent(Main.this, EmergencyCall.class);
+                    Intent intent = new Intent(Main.this, Main.class);
                     startActivity(intent);
                     return true;
                 } else if (itemId.equals(R.id.nav_map)) {

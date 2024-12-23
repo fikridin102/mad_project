@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Permission to make phone calls -->
-    <uses-permission android:name="android.permission.PHONE_CALLS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +16,9 @@
         android:theme="@style/Theme.Mad_project"
         tools:targetApi="31">
 
+        <!-- Launch Activity -->
         <activity
-            android:name=".Main"
+            android:name=".Mula"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,6 +26,8 @@
             </intent-filter>
         </activity>
 
+        <!-- Other Activities -->
+        <activity android:name=".Main"></activity>
         <activity android:name=".Report"></activity>
         <activity android:name=".ReportForm"></activity>
         <activity android:name=".EmergencyCall"></activity>

@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class EmergencyCall extends Activity {
 
@@ -30,10 +34,38 @@ public class EmergencyCall extends Activity {
                 makeCall("60182508259"); // Replace with the desired emergency phone number
             }
         });
+
+        // Setup BottomNavigationView
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navbar);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int selectedItemId = item.getItemId();
+
+                // Navigation using if-else
+                if (selectedItemId == R.id.nav_home) {
+                    Intent homeIntent = new Intent(EmergencyCall.this, Main.class);
+                    startActivity(homeIntent);
+                    return true;
+                } else if (selectedItemId == R.id.nav_map) {
+                    // TODO: Add logic for Map navigation
+                    // Intent mapIntent = new Intent(EmergencyCall.this, MapActivity.class);
+                    // startActivity(mapIntent);
+                    return true;
+                } else if (selectedItemId == R.id.nav_profile) {
+                    // TODO: Add logic for Profile navigation
+                    // Intent profileIntent = new Intent(EmergencyCall.this, ProfileActivity.class);
+                    // startActivity(profileIntent);
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
     }
 
     // Method to make the emergency call
-    public void makeCall(String phoneNumber) {
+    private void makeCall(String phoneNumber) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + phoneNumber));
 

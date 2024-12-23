@@ -6,35 +6,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Emergency Title -->
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/holo_blue_dark"
+        android:elevation="4dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/home" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Title -->
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="KECEMASAN"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="66dp" /> <!-- Adjusted marginTop for better spacing -->
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 
     <!-- SOS Button -->
+
+    <!-- SOS Label -->
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="182dp"
         android:layout_height="177dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="148dp"
         android:background="@null"
         android:contentDescription="SOS emergency button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView3"
-        app:srcCompat="@drawable/roundedbutton"
-        tools:layout_editor_absoluteY="201dp" />
+        app:layout_constraintTop_toBottomOf="@id/textView"
+        app:srcCompat="@drawable/roundedbutton" />
 
-    <!-- SOS Label -->
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -43,22 +69,36 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
         android:textSize="34sp"
-        app:layout_constraintTop_toTopOf="@id/imageButton3"
         app:layout_constraintBottom_toBottomOf="@id/imageButton3"
         app:layout_constraintStart_toStartOf="@id/imageButton3"
-        app:layout_constraintEnd_toEndOf="@id/imageButton3" />
+        app:layout_constraintEnd_toEndOf="@id/imageButton3"
+        app:layout_constraintTop_toTopOf="@id/imageButton3" />
 
     <!-- Instructional Text -->
+
+    <!-- Bottom Navigation -->
+
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/nadma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="132dp"
         android:text="Tekan SOS jika berlaku bencana alam disekeliling anda"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="20dp"
         app:layout_constraintTop_toBottomOf="@id/imageButton3" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/navbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/btm_navbar_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
