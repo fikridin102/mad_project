@@ -8,17 +8,9 @@
     tools:context=".PanduanForm">
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:background="@android:color/holo_blue_dark"
-        android:elevation="4dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="Add Disaster Guide"
-        app:titleTextColor="@android:color/white"
-        tools:layout_editor_absoluteX="0dp" />
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
     <EditText
         android:id="@+id/editTextTitle"
@@ -99,6 +91,6 @@
         app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintMargin="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar4" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

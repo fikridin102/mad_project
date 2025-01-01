@@ -3,6 +3,7 @@ package com.example.mad_project;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -15,14 +16,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
@@ -30,11 +28,15 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class GroundMovement extends Activity implements SensorEventListener {
@@ -57,8 +59,7 @@ public class GroundMovement extends Activity implements SensorEventListener {
     private long startTime;
     private long elapsedTime = 0;
     private final long monitoringDuration = 90 * 1000; // 90 seconds (1.5 minutes)
-
-    private TableLayout tableLayout; // Table layout to display results
+    private TableLayout tableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +75,14 @@ public class GroundMovement extends Activity implements SensorEventListener {
         btnStop = findViewById(R.id.btnStop);
         ImageButton btnBack = findViewById(R.id.btnBack);
         lineChart = findViewById(R.id.viewGraph);
-        tableLayout = findViewById(R.id.tableLayout); // Initialize table layout
+        tableLayout = findViewById(R.id.tableLayout);
+        Button btnYoutube = findViewById(R.id.btnYoutube);
 
+        // Initialize intensityData and timeData
+        intensityAverage = new ArrayList<>();
+        intensityData = new ArrayList<>();
+        timeData = new ArrayList<>();
+        
         // Initialize SensorManager and Accelerometer
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager == null) {
@@ -92,11 +99,6 @@ public class GroundMovement extends Activity implements SensorEventListener {
         }
 
         Log.d("GroundMovement", "Accelerometer sensor initialized");
-
-        // Initialize intensityData and timeData
-        intensityAverage = new ArrayList<>();
-        intensityData = new ArrayList<>();
-        timeData = new ArrayList<>();
 
         // Initialize Handler and Runnable
         handler = new Handler();
@@ -123,7 +125,13 @@ public class GroundMovement extends Activity implements SensorEventListener {
             startActivity(main);
         });
 
+        btnYoutube.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=aV89_yUJunM"));
+            startActivity(intent);
+        });
+
         btnStart.setOnClickListener(view -> startMonitoring());
+
         btnStop.setOnClickListener(view -> stopMonitoring());
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.navbar);
@@ -162,7 +170,7 @@ public class GroundMovement extends Activity implements SensorEventListener {
         leftAxis.setLabelCount(11, false);
         leftAxis.setDrawGridLines(true);
         leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(50f);
+        leftAxis.setAxisMaximum(25f);
         leftAxis.setGranularity(1f);
 
         YAxis rightAxis = lineChart.getAxisRight();
@@ -242,8 +250,9 @@ public class GroundMovement extends Activity implements SensorEventListener {
         displayResultsInTable();
     }
 
+    //masuk db
     private void displayResultsInTable() {
-        // Clear only the previous data rows, keeping the header intact
+        // Clear the table layout
         int childCount = tableLayout.getChildCount();
         for (int i = childCount - 1; i > 0; i--) {
             tableLayout.removeViewAt(i);
@@ -279,7 +288,47 @@ public class GroundMovement extends Activity implements SensorEventListener {
             // Add the row to the table layout
             tableLayout.addView(row);
         }
+
+        // Calculate total sequence
+        int totalSequence = intensityData.size();
+
+        // Calculate average intensity
+        float totalIntensity = 0f;
+        for (int i = 0; i < intensityData.size(); i++) {
+            totalIntensity += intensityData.get(i).getY();
+        }
+        float averageIntensity = totalSequence > 0 ? totalIntensity / totalSequence : 0;
+
+        // Retrieve start and end time
+        String startTime = timeData.isEmpty() ? "" : timeData.get(0);
+        String endTime = timeData.isEmpty() ? "" : timeData.get(timeData.size() - 1);
+
+        // Add these details to the hashmap (hmInfo)
+        HashMap hmInfo = new HashMap();
+        hmInfo.put("Total Sequence", totalSequence);
+        hmInfo.put("Average Intensity", averageIntensity);
+        hmInfo.put("Start", startTime);
+        hmInfo.put("End", endTime);
+
+        // Get the current date and time in the format ddMMyyyy/HHmmss
+        SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHHmmss", Locale.getDefault());
+        String dateTimeId = dateFormat.format(new Date());
+
+        // Insert data into Firebase
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://mad-project-2fa59-default-rtdb.firebaseio.com/");
+        DatabaseReference dbRef = database.getReference("Ground Movement").child(dateTimeId);
+        dbRef.setValue(hmInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(GroundMovement.this, "Data inserted successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(GroundMovement.this, "Failed to insert data", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
+
 
     // Add this variable to track the last recorded time
     private long lastRecordedTime = 0;
