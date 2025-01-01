@@ -17,32 +17,9 @@
         android:background="?android:attr/windowBackground" />
 
     <!-- Toolbar with Logo -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@android:color/holo_blue_dark"
-        android:elevation="4dp"
-        android:gravity="center"
-        android:padding="8dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/home"
-                android:layout_marginStart="177dp"/>
-        </LinearLayout>
-    </androidx.appcompat.widget.Toolbar>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
     <!-- RecyclerView -->
 
@@ -54,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar3"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView

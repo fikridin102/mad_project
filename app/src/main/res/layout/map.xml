@@ -2,19 +2,29 @@
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:osm="http://schemas.android.com/tools">
 
     <include
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <com.mapbox.mapboxsdk.maps.MapView
+<!--    <com.mapbox.mapboxsdk.maps.MapView-->
+<!--        android:id="@+id/mapView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        mapbox:mapbox_cameraTargetLat="40.7128"-->
+<!--        mapbox:mapbox_cameraTargetLng="-74.0060"-->
+<!--        mapbox:mapbox_cameraZoom="4"-->
+<!--        tools:ignore="MissingClass" />-->
+
+    <org.osmdroid.views.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.7128"
-        mapbox:mapbox_cameraTargetLng="-74.0060"
-        mapbox:mapbox_cameraZoom="4"
-        tools:ignore="MissingClass" />
+        osm:tileSource="MAPNIK"
+        android:zoomLevel="15"
+        android:scrollBarStyle="insideOverlay" />
+
 
 </RelativeLayout>

@@ -17,9 +17,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
 
 public class ReportForm extends Activity {
 
@@ -83,6 +91,7 @@ public class ReportForm extends Activity {
             builder.show();
         });
 
+        //tak upload gambar dalam db
         btnSubmit.setOnClickListener(v -> {
             String type = txtType.getText().toString().trim();
             String fullName = txtFullName.getText().toString().trim();
@@ -92,15 +101,38 @@ public class ReportForm extends Activity {
 
             if (fullName.isEmpty() || email.isEmpty() || address.isEmpty() || detail.isEmpty()) {
                 Toast.makeText(ReportForm.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
-            } else if (type.isEmpty()) {
-                Toast.makeText(ReportForm.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
-            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(ReportForm.this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
             } else {
                 // Handle submission logic
-                Toast.makeText(ReportForm.this, "Report submitted successfully!", Toast.LENGTH_SHORT).show();
-                Intent report = new Intent(ReportForm.this, Report.class);
-                startActivity(report);
+                // Add these details to the hashmap (hmInfo)
+                HashMap hmInfo = new HashMap();
+                if (!type.isEmpty()){
+                    hmInfo.put("Type", type);
+                }
+                hmInfo.put("Reporter Name", fullName);
+                hmInfo.put("Email", email);
+                hmInfo.put("Address", address);
+                hmInfo.put("Description", detail);
+
+                // Get the current date and time in the format ddMMyyyy/HHmmss
+                SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHHmmss", Locale.getDefault());
+                String dateTimeId = dateFormat.format(new Date());
+
+                // Insert data into Firebase
+                FirebaseDatabase database = FirebaseDatabase.getInstance("https://mad-project-2fa59-default-rtdb.firebaseio.com/");
+                DatabaseReference dbRef = database.getReference("Aduan").child(title).child(dateTimeId);
+                dbRef.setValue(hmInfo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ReportForm.this, "Report submitted successfully!", Toast.LENGTH_SHORT).show();
+                            Intent report = new Intent(ReportForm.this, Report.class);
+                            startActivity(report);
+                        } else {
+                            Toast.makeText(ReportForm.this, "Failed to insert data", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
             }
         });
 
