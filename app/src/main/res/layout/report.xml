@@ -57,13 +57,14 @@
         android:id="@+id/reportGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:horizontalSpacing="16dp"
-        android:verticalSpacing="16dp"
-        android:clickable="true"
-        android:focusable="false"
         android:layout_below="@id/label1"
-        android:descendantFocusability="blocksDescendants" />
+        android:layout_marginTop="-1dp"
+        android:clickable="true"
+        android:descendantFocusability="blocksDescendants"
+        android:focusable="false"
+        android:horizontalSpacing="16dp"
+        android:numColumns="2"
+        android:verticalSpacing="16dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar"
