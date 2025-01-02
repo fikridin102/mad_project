@@ -26,7 +26,7 @@ public class Main extends Activity {
         setContentView(R.layout.main);
 
         // grid img and lbl
-        String[] labels = {"Aduan", "Kecemasan", "Pergerakan Tanah"};
+        String[] labels = {"Aduan", "Kecemasan", "Pergerakan Tanah" };
         int[] images = {
                 R.drawable.report,
                 R.drawable.emergency,
