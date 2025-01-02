@@ -11,15 +11,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class PanduanActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private PanduanAdapter panduanAdapter;
-    private List<Map<String, String>> panduanList;
+    private List<String> panduanTitles;
+    private List<String> panduanDescriptions;
     private DatabaseReference databaseReference;
 
     @Override
@@ -27,13 +26,17 @@ public class PanduanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.panduan);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        // Initialize RecyclerView
+        recyclerView = findViewById(R.id.rv1);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        panduanList = new ArrayList<>();
-        panduanAdapter = new PanduanAdapter(panduanList);
+
+        // Initialize the lists
+        panduanTitles = new ArrayList<>();
+        panduanDescriptions = new ArrayList<>();
+        panduanAdapter = new PanduanAdapter(panduanTitles, panduanDescriptions);
         recyclerView.setAdapter(panduanAdapter);
 
-        // Firebase Reference
+        // Initialize Firebase Database reference
         databaseReference = FirebaseDatabase.getInstance().getReference("DisasterGuides");
 
         // Fetch Data from Firebase
@@ -41,19 +44,33 @@ public class PanduanActivity extends AppCompatActivity {
     }
 
     private void fetchPanduan() {
+        // Add a listener to fetch data from Firebase
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                panduanList.clear();
+                // Clear the lists before adding new data
+                panduanTitles.clear();
+                panduanDescriptions.clear();
+
+                // Iterate through the data in Firebase
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Map<String, String> panduan = (Map<String, String>) snapshot.getValue();
-                    panduanList.add(panduan);
+                    String title = snapshot.child("title").getValue(String.class);
+                    String description = snapshot.child("description").getValue(String.class);
+
+                    // Add title and description to respective lists
+                    if (title != null && description != null) {
+                        panduanTitles.add(title);
+                        panduanDescriptions.add(description);
+                    }
                 }
+
+                // Notify the adapter that data has been updated
                 panduanAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                // Handle errors when fetching data
                 Toast.makeText(PanduanActivity.this, "Failed to load data.", Toast.LENGTH_SHORT).show();
             }
         });
