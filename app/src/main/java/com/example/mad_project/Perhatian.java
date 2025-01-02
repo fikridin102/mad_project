@@ -28,13 +28,13 @@ public class Perhatian extends AppCompatActivity {
         }
 
         // Set up back button click listener
-        ImageButton backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed(); // Or your custom back action
-            }
-        });
+//        ImageButton backButton = findViewById(R.id.backButton);
+//        backButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed(); // Or your custom back action
+//            }
+//        });
 
 
 
