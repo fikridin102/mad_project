@@ -22,13 +22,13 @@ public class Report extends Activity {
         // grid img and lbl
         String[] labels = {"Banjir", "Ribut", "Tanah Runtuh", "Pencemaran", "Kemarau", "Penutupan Jalan", "Lain-lain"};
         int[] images = {
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
+                R.drawable.flood,
+                R.drawable.wind,
+                R.drawable.landslide,
+                R.drawable.virus,
+                R.drawable.thermostat,
+                R.drawable.road,
+                R.drawable.shield,
         };
 
         GridView gridView = findViewById(R.id.reportGrid);

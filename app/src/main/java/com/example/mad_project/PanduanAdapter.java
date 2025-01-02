@@ -7,14 +7,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
-import java.util.Map;
 
 public class PanduanAdapter extends RecyclerView.Adapter<PanduanAdapter.PanduanViewHolder> {
 
-    private List<Map<String, String>> panduanList;
+    private List<String> titles;
+    private List<String> descriptions;
 
-    public PanduanAdapter(List<Map<String, String>> panduanList) {
-        this.panduanList = panduanList;
+    public PanduanAdapter(List<String> titles, List<String> descriptions) {
+        this.titles = titles;
+        this.descriptions = descriptions;
     }
 
     @NonNull
@@ -27,14 +28,13 @@ public class PanduanAdapter extends RecyclerView.Adapter<PanduanAdapter.PanduanV
 
     @Override
     public void onBindViewHolder(@NonNull PanduanViewHolder holder, int position) {
-        Map<String, String> panduan = panduanList.get(position);
-        holder.textViewTitle.setText(panduan.get("title"));
-        holder.textViewDescription.setText(panduan.get("description"));
+        holder.textViewTitle.setText(titles.get(position));
+        holder.textViewDescription.setText(descriptions.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return panduanList.size();
+        return titles.size();
     }
 
     static class PanduanViewHolder extends RecyclerView.ViewHolder {
