@@ -54,7 +54,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     // Mapbox SDK dependency
-    implementation(libs.mapbox.android.sdk)
-    implementation("org.osmdroid:osmdroid-android:6.1.10")
+    implementation(libs.osmdroid.android)
 
 }
