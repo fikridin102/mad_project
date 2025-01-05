@@ -26,11 +26,12 @@ public class Main extends Activity {
         setContentView(R.layout.main);
 
         // grid img and lbl
-        String[] labels = {"Aduan", "Kecemasan", "Pergerakan Tanah"};
+        String[] labels = {"Aduan", "Kecemasan", "Pergerakan Tanah", "Panduan"};
         int[] images = {
                 R.drawable.report,
                 R.drawable.emergency,
-                R.drawable.back,
+                R.drawable.landslide,
+                R.drawable.panduan,
         };
 
         // Create a map of grid item index to target activity

@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,34 +28,11 @@
         android:layout_marginRight="16dp"
         android:background="@null" />
 
-    <GridView
-        android:id="@+id/reportGrid"
+    <ExpandableListView
+        android:id="@+id/expandableListViewReports"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/label1"
-        android:layout_marginTop="-1dp"
-        android:clickable="true"
-        android:descendantFocusability="blocksDescendants"
-        android:focusable="false"
-        android:horizontalSpacing="16dp"
-        android:numColumns="2"
-        android:verticalSpacing="16dp" />
-
-    <Button
-        android:id="@+id/btnView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Senarai Aduan"
-        android:layout_below="@id/reportGrid"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/btm_navbar_menu" />
 
 </RelativeLayout>
