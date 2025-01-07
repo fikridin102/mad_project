@@ -124,12 +124,12 @@ public class ReportForm extends Activity {
             } else {
                 HashMap<String, Object> hmInfo = new HashMap<>();
                 if (!type.isEmpty()) {
-                    hmInfo.put("Type", type);
+                    hmInfo.put("Jenis", type);
                 }
-                hmInfo.put("Reporter Name", fullName);
-                hmInfo.put("Email", email);
-                hmInfo.put("Address", address);
-                hmInfo.put("Description", detail);
+                hmInfo.put("Nama Pengadu", fullName);
+                hmInfo.put("Emel", email);
+                hmInfo.put("Alamat", address);
+                hmInfo.put("Perincian Laporan", detail);
 
                 // Get the current date and time in the format ddMMyyyy/HHmmss
                 SimpleDateFormat dateFormat = new SimpleDateFormat("ddMMyyyyHHmmss", Locale.getDefault());
@@ -224,20 +224,20 @@ public class ReportForm extends Activity {
                 DataSnapshot reportSnapshot = task.getResult();
 
                 // Null check and logging
-                reporterName = reportSnapshot.child("Reporter Name").getValue(String.class);
-                email = reportSnapshot.child("Email").getValue(String.class);
-                address = reportSnapshot.child("Address").getValue(String.class);
-                description = reportSnapshot.child("Description").getValue(String.class);
-                type = reportSnapshot.child("Type").getValue(String.class);
+                reporterName = reportSnapshot.child("Nama Pengadu").getValue(String.class);
+                email = reportSnapshot.child("Emel").getValue(String.class);
+                address = reportSnapshot.child("Alamat").getValue(String.class);
+                description = reportSnapshot.child("Perincian Laporan").getValue(String.class);
+                type = reportSnapshot.child("Jenis").getValue(String.class);
 
 
                 // Set values to the UI
                 callback.onReportDetailsRetrieved(new HashMap<String, String>() {{
-                    put("Reporter Name", reporterName);
-                    put("Email", email);
-                    put("Address", address);
-                    put("Description", description);
-                    put("Type", type);
+                    put("Nama Pengadu", reporterName);
+                    put("Emel", email);
+                    put("Alamat", address);
+                    put("Perincian Laporan", description);
+                    put("Jenis", type);
                 }});
 
             } else {

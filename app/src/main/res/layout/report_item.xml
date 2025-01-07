@@ -16,7 +16,7 @@
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
+        android:text="Ubah"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true" />
 
