@@ -128,15 +128,15 @@ public class ReportExpandableListAdapter extends android.widget.BaseExpandableLi
         dbRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 for (DataSnapshot reportSnapshot : task.getResult().getChildren()) {
-                    String reportDescription = reportSnapshot.child("Perincian Laporan").getValue(String.class);
-                    String reporterName = reportSnapshot.child("Nama Pengadu").getValue(String.class);
-                    String address = reportSnapshot.child("Alamat").getValue(String.class);
-                    String type = reportSnapshot.child("Jenis").getValue(String.class);
+                    String reportDescription = reportSnapshot.child("Description").getValue(String.class);
+                    String reporterName = reportSnapshot.child("Reporter Name").getValue(String.class);
+                    String address = reportSnapshot.child("Address").getValue(String.class);
+                    String type = reportSnapshot.child("Type").getValue(String.class);
 
-                    String constructedReportDetails = "Perincian Laporan: " + reportDescription +
-                            "\nNama Pengadu: " + reporterName +
-                            "\nAlamat: " + address +
-                            (type != null ? "\nJenis: " + type : "");
+                    String constructedReportDetails = "Description: " + reportDescription +
+                            "\nReporter Name: " + reporterName +
+                            "\nAddress: " + address +
+                            (type != null ? "\nType: " + type : "");
 
                     if (constructedReportDetails.equals(reportDetails)) {
                         String reportId = reportSnapshot.getKey();
@@ -154,15 +154,15 @@ public class ReportExpandableListAdapter extends android.widget.BaseExpandableLi
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         // Construct the dialog title with email and report ID
-        String dialogTitle = "Semakan";
+        String dialogTitle = "Validation";
         builder.setTitle(dialogTitle);
 
         // Create EditText for email input
         final EditText emailInput = new EditText(context);
-        emailInput.setHint("Masukkan Emel Anda");
+        emailInput.setHint("Enter your email");
         builder.setView(emailInput);
 
-        builder.setPositiveButton("Semak", (dialog, which) -> {
+        builder.setPositiveButton("Validate", (dialog, which) -> {
             String enteredEmail = emailInput.getText().toString().trim();
             if (enteredEmail.equalsIgnoreCase(email.trim())) {
                 // Email matches, proceed to ReportForm
@@ -177,7 +177,7 @@ public class ReportExpandableListAdapter extends android.widget.BaseExpandableLi
             }
         });
 
-        builder.setNegativeButton("Batal", (dialog, which) -> dialog.dismiss());
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
         builder.show();
     }
 
