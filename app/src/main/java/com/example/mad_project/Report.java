@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import androidx.annotation.NonNull;
@@ -18,17 +19,18 @@ public class Report extends Activity {
         setContentView(R.layout.report);
 
         ImageButton btnBack = findViewById(R.id.btnBack);
+        Button btnView = findViewById(R.id.btnView);
 
         // grid img and lbl
         String[] labels = {"Banjir", "Ribut", "Tanah Runtuh", "Pencemaran", "Kemarau", "Penutupan Jalan", "Lain-lain"};
         int[] images = {
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
-                R.drawable.home,
+                R.drawable.flood,
+                R.drawable.wind,
+                R.drawable.landslide,
+                R.drawable.virus,
+                R.drawable.thermostat,
+                R.drawable.road,
+                R.drawable.shield,
         };
 
         GridView gridView = findViewById(R.id.reportGrid);
@@ -40,6 +42,14 @@ public class Report extends Activity {
             public void onClick(View v) {
                 Intent main = new Intent(Report.this, Main.class);
                 startActivity(main);
+            }
+        });
+
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent reportDetail = new Intent(Report.this, ReportDetail.class);
+                startActivity(reportDetail);
             }
         });
 

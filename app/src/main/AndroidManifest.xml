@@ -9,10 +9,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
 
     <application
         android:allowBackup="true"
@@ -24,6 +27,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mad_project"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.mapbox.AccessToken"
+            android:value="YOUR_MAPBOX_ACCESS_TOKEN" />
 
         <!-- Launch Activity -->
         <activity
@@ -39,6 +46,7 @@
         <activity android:name=".Main"></activity>
         <activity android:name=".Report"></activity>
         <activity android:name=".ReportForm"></activity>
+        <activity android:name=".ReportDetail"></activity>
         <activity android:name=".GroundMovement"></activity>
         <activity android:name=".EmergencyCall"></activity>
         <activity android:name=".Perhatian"></activity>

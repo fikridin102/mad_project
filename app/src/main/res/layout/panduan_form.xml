@@ -1,6 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".PanduanForm">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Title:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:layout_marginTop="16dp" /> <!-- Changed to layout_marginTop -->
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:hint="Enter Title"
+        android:inputType="text"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        android:layout_marginTop="8dp" /> <!-- Changed to layout_marginTop -->
+
+    <TextView
+        android:id="@+id/descText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextTitle"
+        android:layout_marginTop="16dp" /> <!-- Changed to layout_marginTop -->
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="0dp"
+        android:layout_height="144dp"
+        android:hint="Enter Guide Description"
+        android:inputType="textMultiLine"
+        android:minHeight="200dp"
+        android:padding="12dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descText"
+        android:layout_marginTop="8dp" /> <!-- Changed to layout_marginTop -->
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:text="Save"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/purple_500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextDescription"
+        android:layout_marginTop="36dp" /> <!-- Changed to layout_marginTop -->
+
+    <Button
+        android:id="@+id/buttonCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:text="Cancel"
+        android:textColor="@android:color/white"
+        android:backgroundTint="@color/grey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonSave"
+        android:layout_marginTop="8dp" /> <!-- Changed to layout_marginTop -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

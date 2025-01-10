@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -25,6 +26,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -32,13 +34,26 @@ android {
 }
 
 dependencies {
-
+    // Core dependencies
     implementation(libs.appcompat)
     implementation(libs.material)
+
+    // Firebase dependencies
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.database.ktx)
+
+    // Maps dependency
     implementation(libs.play.services.maps)
+
+    // MPAndroidChart library for charts/visualizations
+    implementation(libs.mpandroidchart)
+
+    // Testing dependencies
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
-    implementation ("org.osmdroid:osmdroid-android:6.1.13")
+
+    // Mapbox SDK dependency
+    implementation(libs.osmdroid.android)
+
 }
