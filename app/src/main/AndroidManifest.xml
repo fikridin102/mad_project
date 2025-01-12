@@ -49,6 +49,11 @@
         <activity android:name=".Perhatian_form"></activity>
         <activity android:name=".Perhatian_edit"></activity>
         <activity android:name=".Perhatian"></activity>
+        <activity android:name=".PanduanActivity"></activity>
+        <activity android:name=".PanduanForm"></activity>
+        <activity android:name=".EditPanduanActivity"></activity>
+
+
 
     </application>
 
