@@ -10,9 +10,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,6 +31,9 @@ public class PanduanAdapter extends BaseExpandableListAdapter {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listDataChild = listDataChild;
+
+        // Enable Firebase offline persistence
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
     }
 
     @Override
@@ -71,7 +78,6 @@ public class PanduanAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.panduan_group_item, null);
         }
 
-        // Title for the group
         TextView textViewTitle = convertView.findViewById(R.id.textViewTitle);
         textViewTitle.setText((String) getGroup(groupPosition));
 
@@ -85,110 +91,123 @@ public class PanduanAdapter extends BaseExpandableListAdapter {
             convertView = inflater.inflate(R.layout.panduan_child_item, null);
         }
 
-        // Set description for the child
         TextView textViewDescription = convertView.findViewById(R.id.textViewDescription);
         Button btnEdit = convertView.findViewById(R.id.btnEdit);
         Button btnDelete = convertView.findViewById(R.id.buttonDelete);
 
-        // Set description text
         textViewDescription.setText((String) getChild(groupPosition, childPosition));
 
-        // Set click listener for the edit button
-        btnEdit.setOnClickListener(v -> {
-            String guideTitle = listDataHeader.get(groupPosition);
-            String guideDescription = listDataChild.get(guideTitle).get(childPosition);
+        // Check internet connectivity to enable/disable edit and delete buttons
+        DatabaseReference connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
+        connectedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                boolean isConnected = snapshot.getValue(Boolean.class);
 
-            // Fetch the guide ID and navigate to the edit activity
-            fetchGuideId(guideTitle, guideDescription, guideId -> {
-                if (guideId == null) {
-                    Toast.makeText(context, "Guide not found", Toast.LENGTH_SHORT).show();
+                if (!isConnected) {
+                    // Offline mode: Disable edit and delete buttons
+                    btnEdit.setEnabled(false);
+                    btnDelete.setEnabled(false);
+                    btnEdit.setAlpha(0.5f);
+                    btnDelete.setAlpha(0.5f);
                 } else {
-                    Intent intent = new Intent(context, EditPanduanActivity.class);
-                    intent.putExtra("guideId", guideId);
-                    intent.putExtra("title", guideTitle);
-                    intent.putExtra("description", guideDescription);
-                    context.startActivity(intent);
+                    // Online mode: Enable edit and delete buttons
+                    btnEdit.setEnabled(true);
+                    btnDelete.setEnabled(true);
+                    btnEdit.setAlpha(1.0f);
+                    btnDelete.setAlpha(1.0f);
                 }
-            });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle error if needed
+            }
         });
 
-        // Set click listener for the delete button
-        btnDelete.setOnClickListener(v -> {
-            String guideTitle = listDataHeader.get(groupPosition);
-            String guideDescription = listDataChild.get(guideTitle).get(childPosition);
+        // Edit button functionality
+        btnEdit.setOnClickListener(v -> {
+            if (btnEdit.isEnabled()) {
+                String guideTitle = listDataHeader.get(groupPosition);
+                String guideDescription = listDataChild.get(guideTitle).get(childPosition);
 
-            // Confirm and delete the guide
-            fetchGuideId(guideTitle, guideDescription, guideId -> {
-                if (guideId == null) {
-                    Toast.makeText(context, "Guide not found", Toast.LENGTH_SHORT).show();
-                } else {
-                    deleteGuide(guideId, groupPosition, childPosition);
-                }
-            });
+                fetchGuideId(guideTitle, guideDescription, guideId -> {
+                    if (guideId == null) {
+                        Toast.makeText(context, "Guide not found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Intent intent = new Intent(context, EditPanduanActivity.class);
+                        intent.putExtra("guideId", guideId);
+                        intent.putExtra("title", guideTitle);
+                        intent.putExtra("description", guideDescription);
+                        context.startActivity(intent);
+                    }
+                });
+            }
+        });
+
+        // Delete button functionality
+        btnDelete.setOnClickListener(v -> {
+            if (btnDelete.isEnabled()) {
+                String guideTitle = listDataHeader.get(groupPosition);
+                String guideDescription = listDataChild.get(guideTitle).get(childPosition);
+
+                fetchGuideId(guideTitle, guideDescription, guideId -> {
+                    if (guideId == null) {
+                        Toast.makeText(context, "Guide not found", Toast.LENGTH_SHORT).show();
+                    } else {
+                        deleteGuide(guideId, groupPosition, childPosition);
+                    }
+                });
+            }
         });
 
         return convertView;
     }
 
     private void fetchGuideId(String guideTitle, String guideDescription, GuideIdCallback callback) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://mad-project-2fa59-default-rtdb.firebaseio.com/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = database.getReference("DisasterGuides");
 
-        // Query the entire DisasterGuides node
+        dbRef.keepSynced(true); // Ensure offline syncing
+
         dbRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful() && task.getResult() != null) {
                 for (DataSnapshot guideSnapshot : task.getResult().getChildren()) {
                     String title = guideSnapshot.child("title").getValue(String.class);
                     String description = guideSnapshot.child("description").getValue(String.class);
 
-                    // Check if both title and description match
                     if (guideTitle.equals(title) && guideDescription.equals(description)) {
-                        String guideId = guideSnapshot.getKey(); // Retrieve the unique ID
+                        String guideId = guideSnapshot.getKey();
                         callback.onGuideIdRetrieved(guideId);
                         return;
                     }
                 }
             }
-            // If no match is found
             callback.onGuideIdRetrieved(null);
         });
     }
 
     private void deleteGuide(String guideId, int groupPosition, int childPosition) {
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://mad-project-2fa59-default-rtdb.firebaseio.com/");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = database.getReference("DisasterGuides").child(guideId);
 
-        // Remove the guide from Firebase
         dbRef.removeValue().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                // Update local data
                 String guideTitle = listDataHeader.get(groupPosition);
-                List<String> childList = listDataChild.get(guideTitle);
+                listDataChild.get(guideTitle).remove(childPosition);
 
-                if (childList != null) {
-                    // Remove the specific child (description)
-                    childList.remove(childPosition);
-
-                    // If no descriptions remain for this title, remove the group
-                    if (childList.isEmpty()) {
-                        listDataChild.remove(guideTitle);
-                        listDataHeader.remove(groupPosition);
-                    }
-
-                    // Notify adapter about the changes
-                    notifyDataSetChanged();
-                    Toast.makeText(context, "Guide deleted successfully", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = ((PanduanActivity) context).getIntent();
-                    ((PanduanActivity) context).finish();
-                    context.startActivity(intent);
+                if (listDataChild.get(guideTitle).isEmpty()) {
+                    listDataChild.remove(guideTitle);
+                    listDataHeader.remove(groupPosition);
                 }
+
+                notifyDataSetChanged();
+                Toast.makeText(context, "Guide deleted successfully", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(context, "Failed to delete guide", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {

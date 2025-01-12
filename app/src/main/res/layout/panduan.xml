@@ -16,11 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Back Button -->
-
-    <!-- Title TextView -->
-
-    <!-- ExpandableListView -->
 
     <ImageButton
         android:id="@+id/btnBackNew"

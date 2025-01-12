@@ -22,9 +22,11 @@ public class PanduanActivity extends Activity {
     private ExpandableListView expandableListView;
     private PanduanAdapter adapter;
     private DatabaseReference databaseReference;
+    private DatabaseReference connectedRef;  // Reference for connectivity status
 
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listDataChild;
+    private ImageButton addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class PanduanActivity extends Activity {
         setContentView(R.layout.panduan);
 
         ImageButton btnBackNew = findViewById(R.id.btnBackNew);
-        ImageButton addButton = findViewById(R.id.addButton);
+        addButton = findViewById(R.id.addButton);
 
         // Back Button click listener
         btnBackNew.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +66,32 @@ public class PanduanActivity extends Activity {
         // Set up the adapter
         adapter = new PanduanAdapter(this, listDataHeader, listDataChild);
         expandableListView.setAdapter(adapter);
+
+        // Initialize Firebase connectivity reference
+        connectedRef = FirebaseDatabase.getInstance().getReference(".info/connected");
+
+        // Set up connectivity listener
+        connectedRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                boolean isConnected = snapshot.getValue(Boolean.class);
+
+                if (!isConnected) {
+                    // Disable the Add Button if offline
+                    addButton.setEnabled(false);
+                    addButton.setAlpha(0.5f);  // Optional: Reduce opacity for visual feedback
+                } else {
+                    // Enable the Add Button if online
+                    addButton.setEnabled(true);
+                    addButton.setAlpha(1.0f);  // Restore opacity
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Handle error if needed
+            }
+        });
 
         // Fetch data from Firebase
         fetchDataFromFirebase();
@@ -110,3 +138,4 @@ public class PanduanActivity extends Activity {
         });
     }
 }
+
