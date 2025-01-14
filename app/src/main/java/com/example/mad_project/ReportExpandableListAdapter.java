@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -96,27 +97,47 @@ public class ReportExpandableListAdapter extends android.widget.BaseExpandableLi
         reportTitle.setText(reportDetails);
 
         Button btnEdit = convertView.findViewById(R.id.btnEdit);
+        Button btnDelete = convertView.findViewById(R.id.btnDelete);
+
         btnEdit.setOnClickListener(v -> {
-            String category = categoryList.get(groupPosition); // This is the title
+            String category = categoryList.get(groupPosition);
             String reportDetail = reportList.get(category).get(childPosition);
 
-            // Get the report ID based on position and validate email
             getReportIdForPosition(groupPosition, childPosition, reportId -> {
                 if (reportId == null) {
                     Toast.makeText(context, "Report ID not found", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Get the email for the report
                 String reportEmail = reportEmails.get(reportId);
-
-                // Show email validation dialog
                 showEmailValidationDialog(reportDetail, reportEmail, category, reportId);
             });
         });
 
+        btnDelete.setOnClickListener(v -> {
+            String category = categoryList.get(groupPosition);
+            String reportDetail = reportList.get(category).get(childPosition);
+
+            getReportIdForPosition(groupPosition, childPosition, reportId -> {
+                if (reportId == null) {
+                    Toast.makeText(context, "Report ID not found", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                String reportEmail = reportEmails.get(reportId);
+                showEmailValidationDialogForDelete(reportDetail, reportEmail, category, reportId);
+            });
+        });
+
+        // Ensure proper layout for buttons
+        LinearLayout buttonLayout = convertView.findViewById(R.id.buttonLayout);
+        buttonLayout.setOrientation(LinearLayout.HORIZONTAL); // Place buttons side by side
+        btnEdit.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+        btnDelete.setLayoutParams(new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+
         return convertView;
     }
+
 
     private void getReportIdForPosition(int groupPosition, int childPosition, ReportIdCallback callback) {
         String category = categoryList.get(groupPosition);
@@ -154,7 +175,7 @@ public class ReportExpandableListAdapter extends android.widget.BaseExpandableLi
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         // Construct the dialog title with email and report ID
-        String dialogTitle = "Semakan";
+        String dialogTitle = "Semakan (Ubah)";
         builder.setTitle(dialogTitle);
 
         // Create EditText for email input
@@ -179,6 +200,44 @@ public class ReportExpandableListAdapter extends android.widget.BaseExpandableLi
 
         builder.setNegativeButton("Batal", (dialog, which) -> dialog.dismiss());
         builder.show();
+    }
+
+    private void showEmailValidationDialogForDelete(String reportDetail, String email, String category, String reportId) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        String dialogTitle = "Semakan (Padam)";
+        builder.setTitle(dialogTitle);
+
+        final EditText emailInput = new EditText(context);
+        emailInput.setHint("Masukkan Emel Anda");
+        builder.setView(emailInput);
+
+        builder.setPositiveButton("Semak", (dialog, which) -> {
+            String enteredEmail = emailInput.getText().toString().trim();
+            if (enteredEmail.equalsIgnoreCase(email.trim())) {
+                // Email matches, proceed to delete report
+                deleteReport(reportId, category);
+            } else {
+                Toast.makeText(context, "Incorrect email, please try again.", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Batal", (dialog, which) -> dialog.dismiss());
+        builder.show();
+    }
+
+    private void deleteReport(String reportId, String category) {
+        FirebaseDatabase database = FirebaseDatabase.getInstance("https://mad-project-2fa59-default-rtdb.firebaseio.com/");
+        DatabaseReference dbRef = database.getReference("Aduan").child(category).child(reportId);
+
+        dbRef.removeValue().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                Toast.makeText(context, "Report deleted successfully.", Toast.LENGTH_SHORT).show();
+                // Optionally update the UI or the adapter data to reflect the deletion
+            } else {
+                Toast.makeText(context, "Failed to delete report.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
