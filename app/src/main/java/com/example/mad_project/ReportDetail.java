@@ -108,16 +108,16 @@ public class ReportDetail extends Activity {
                         List<String> reports = new ArrayList<>();
                         for (DataSnapshot reportSnapshot : categorySnapshot.getChildren()) {
                             String reportId = reportSnapshot.getKey();
-                            String reportDescription = reportSnapshot.child("Perincian Laporan").getValue(String.class);
-                            String reporterName = reportSnapshot.child("Nama Pengadu").getValue(String.class);
-                            String email = reportSnapshot.child("Emel").getValue(String.class);
-                            String address = reportSnapshot.child("Alamat").getValue(String.class);
-                            String type = reportSnapshot.child("Jenis").getValue(String.class);
+                            String reportDescription = reportSnapshot.child("Description").getValue(String.class);
+                            String reporterName = reportSnapshot.child("Reporter Name").getValue(String.class);
+                            String email = reportSnapshot.child("Email").getValue(String.class);
+                            String address = reportSnapshot.child("Address").getValue(String.class);
+                            String type = reportSnapshot.child("Type").getValue(String.class);
 
-                            String reportDetails = "Perincian Laporan: " + reportDescription +
-                                    "\nNama Pengadu: " + reporterName +
-                                    "\nAlamat: " + address +
-                                    (type != null ? "\nJenis: " + type : "");
+                            String reportDetails = "Description: " + reportDescription +
+                                    "\nReporter Name: " + reporterName +
+                                    "\nAddress: " + address +
+                                    (type != null ? "\nType: " + type : "");
 
                             reports.add(reportDetails);
                             reportEmails.put(reportId, email);

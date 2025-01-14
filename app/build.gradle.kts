@@ -55,5 +55,6 @@ dependencies {
 
     // Mapbox SDK dependency
     implementation(libs.osmdroid.android)
+    implementation ("org.osmdroid:osmdroid-android:6.1.12")
 
 }

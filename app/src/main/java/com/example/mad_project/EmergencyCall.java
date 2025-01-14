@@ -31,7 +31,7 @@ public class EmergencyCall extends Activity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeCall("60182508259"); // Replace with the desired emergency phone number
+                makeCall("999"); // Replace with the desired emergency phone number
             }
         });
 

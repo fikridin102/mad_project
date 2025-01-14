@@ -6,16 +6,17 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.BODY_SENSORS" />
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+    <uses-feature android:name="android.hardware.sensor.compass" />
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -28,9 +29,9 @@
         android:theme="@style/Theme.Mad_project"
         tools:targetApi="31">
 
-        <meta-data
-            android:name="com.mapbox.AccessToken"
-            android:value="YOUR_MAPBOX_ACCESS_TOKEN" />
+<!--        <meta-data-->
+<!--            android:name="com.mapbox.AccessToken"-->
+<!--            android:value="YOUR_MAPBOX_ACCESS_TOKEN" />-->
 
         <!-- Launch Activity -->
         <activity
@@ -44,12 +45,21 @@
 
         <!-- Other Activities -->
         <activity android:name=".Main"></activity>
+        <activity android:name=".Map"></activity>
         <activity android:name=".Report"></activity>
         <activity android:name=".ReportForm"></activity>
         <activity android:name=".ReportDetail"></activity>
         <activity android:name=".GroundMovement"></activity>
         <activity android:name=".EmergencyCall"></activity>
+        <activity android:name=".Perhatian_form"></activity>
+        <activity android:name=".Perhatian_edit"></activity>
         <activity android:name=".Perhatian"></activity>
+        <activity android:name=".PanduanActivity"></activity>
+        <activity android:name=".PanduanForm"></activity>
+        <activity android:name=".EditPanduanActivity"></activity>
+        <activity android:name=".CompassActivity"></activity>
+
+
 
     </application>
 

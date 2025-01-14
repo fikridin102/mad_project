@@ -26,12 +26,16 @@ public class Main extends Activity {
         setContentView(R.layout.main);
 
         // grid img and lbl
-        String[] labels = {"Aduan", "Kecemasan", "Pergerakan Tanah", "Panduan"};
+        String[] labels = {"Aduan", "Kecemasan", "Pergerakan Tanah", "Panduan", "Perhatian", "Kompas"};
         int[] images = {
                 R.drawable.report,
                 R.drawable.emergency,
                 R.drawable.landslide,
                 R.drawable.panduan,
+                R.drawable.perhatian,
+                R.drawable.kompas,
+
+
         };
 
         // Create a map of grid item index to target activity
@@ -39,6 +43,10 @@ public class Main extends Activity {
         activityMap.put(0, Report.class);
         activityMap.put(1, EmergencyCall.class);
         activityMap.put(2, GroundMovement.class);
+        activityMap.put(3, PanduanActivity.class);
+        activityMap.put(4, Perhatian.class);
+        activityMap.put(5, CompassActivity.class);
+
 
         // Initialize GridView and set the custom adapter with the map
         GridView gridView = findViewById(R.id.funcGrid);
@@ -57,8 +65,8 @@ public class Main extends Activity {
                     startActivity(main);
                     return true;
                 } else if (itemId.equals(R.id.nav_map)) {
-//                    Intent intent = new Intent(MainActivity.this, Report.class);
-//                    startActivity(intent);
+                    Intent intent = new Intent(Main.this, Map.class);
+                    startActivity(intent);
                     return true;
                 } else if (itemId.equals(R.id.nav_profile)) {
 //                    Intent intent = new Intent(MainActivity.this, Report.class);

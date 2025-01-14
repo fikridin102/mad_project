@@ -11,71 +11,102 @@
         android:id="@+id/toolbar"
         layout="@layout/toolbar"/>
 
-    <TextView
-        android:id="@+id/titleText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Title:"
+    <!-- Changed to layout_marginTop -->
+
+    <!-- Changed to layout_marginTop -->
+
+    <!-- Changed to layout_marginTop -->
+
+    <!-- Changed to layout_marginTop -->
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="359dp"
+        android:layout_height="136dp"
+        android:layout_marginTop="4dp"
+        android:hint="Enter Guide Description"
+        android:inputType="textMultiLine"
+        android:minHeight="200dp"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:layout_marginTop="16dp" /> <!-- Changed to layout_marginTop -->
+        app:layout_constraintTop_toBottomOf="@id/descText" />
 
     <EditText
         android:id="@+id/editTextTitle"
-        android:layout_width="0dp"
+        android:layout_width="352dp"
         android:layout_height="43dp"
+        android:layout_marginTop="4dp"
         android:hint="Enter Title"
         android:inputType="text"
         android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleText"
-        android:layout_marginTop="8dp" /> <!-- Changed to layout_marginTop -->
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText" />
 
     <TextView
         android:id="@+id/descText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
         android:text="Description"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextTitle"
-        android:layout_marginTop="16dp" /> <!-- Changed to layout_marginTop -->
-
-    <EditText
-        android:id="@+id/editTextDescription"
-        android:layout_width="0dp"
-        android:layout_height="144dp"
-        android:hint="Enter Guide Description"
-        android:inputType="textMultiLine"
-        android:minHeight="200dp"
-        android:padding="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/descText"
-        android:layout_marginTop="8dp" /> <!-- Changed to layout_marginTop -->
+        app:layout_constraintTop_toBottomOf="@id/editTextTitle" />
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/purple_500"
         android:text="Save"
         android:textColor="@android:color/white"
-        android:backgroundTint="@color/purple_500"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextDescription"
-        android:layout_marginTop="36dp" /> <!-- Changed to layout_marginTop -->
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextDescription" />
 
     <Button
         android:id="@+id/buttonCancel"
         android:layout_width="wrap_content"
         android:layout_height="41dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="@color/grey"
         android:text="Cancel"
         android:textColor="@android:color/white"
-        android:backgroundTint="@color/grey"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buttonSave"
-        android:layout_marginTop="8dp" /> <!-- Changed to layout_marginTop -->
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonSave" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="64dp"
+        android:text="Panduan"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/titleText"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.459" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="136dp"
+        android:text="Title:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <!-- Changed to layout_marginTop -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
