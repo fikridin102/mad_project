@@ -2,6 +2,7 @@ package com.example.mad_project;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -147,28 +148,30 @@ public class ReportExpandableListAdapter extends android.widget.BaseExpandableLi
         DatabaseReference dbRef = database.getReference("Aduan").child(category);
 
         dbRef.get().addOnCompleteListener(task -> {
+
             if (task.isSuccessful() && task.getResult() != null) {
                 for (DataSnapshot reportSnapshot : task.getResult().getChildren()) {
-                    String reportDescription = reportSnapshot.child("Perincian Laporan").getValue(String.class);
-                    String reporterName = reportSnapshot.child("Nama Pengadu").getValue(String.class);
-                    String address = reportSnapshot.child("Alamat").getValue(String.class);
-                    String type = reportSnapshot.child("Jenis").getValue(String.class);
+                    String reportId = reportSnapshot.getKey();
+                    String description = reportSnapshot.child("Description").getValue(String.class);
+                    String reporterName = reportSnapshot.child("Reporter Name").getValue(String.class);
+                    String address = reportSnapshot.child("Address").getValue(String.class);
 
-                    String constructedReportDetails = "Perincian Laporan: " + reportDescription +
-                            "\nNama Pengadu: " + reporterName +
-                            "\nAlamat: " + address +
-                            (type != null ? "\nJenis: " + type : "");
+//
 
-                    if (constructedReportDetails.equals(reportDetails)) {
-                        String reportId = reportSnapshot.getKey();
+                    if (description != null && reporterName != null && address != null ) {
+
                         callback.onReportIdRetrieved(reportId);
                         return;
                     }
+
+
                 }
             }
             callback.onReportIdRetrieved(null);
         });
     }
+
+
 
     private void showEmailValidationDialog(String reportDetail, String email, String category, String reportId) {
         // Create the dialog builder
