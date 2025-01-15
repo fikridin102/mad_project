@@ -60,17 +60,11 @@ public class Main extends Activity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int selectedItem = item.getItemId();
                 String itemId = String.valueOf(selectedItem);
-                if (itemId.equals(R.id.nav_home)) {
-                    Intent main = new Intent(Main.this, Main.class);
-                    startActivity(main);
+                if (item.getItemId() == R.id.nav_home) {
+                    startActivity(new Intent(Main.this, Main.class));
                     return true;
-                } else if (itemId.equals(R.id.nav_map)) {
-                    Intent intent = new Intent(Main.this, Map.class);
-                    startActivity(intent);
-                    return true;
-                } else if (itemId.equals(R.id.nav_profile)) {
-//                    Intent intent = new Intent(MainActivity.this, Report.class);
-//                    startActivity(intent);
+                } else if (item.getItemId() == R.id.nav_map) {
+                    startActivity(new Intent(Main.this, com.example.mad_project.Map.class));
                     return true;
                 }
                 return false;
